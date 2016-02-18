@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- <link rel="stylesheet" type="text/css" href="css/indexlogin.css" /> !-->
+         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">   
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+         <script type="text/javascript" src="js/jquery.min.js"></script>
+         <script type="text/javascript" src="js/index.js"></script>
+
+
+       
+
+        <style type="text/css">
+
+            .divImg{
+
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+
+                height: 70px;
+                width: 70px;
+                background-position: center center;
+                margin-top: 100px;
+
+                background-size: 50%;
+                background:#fff url("img/face.png") no-repeat center;
+
+
+            }
+
+            .formulario{
+
+
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 110px;
+                position: center center;
+                
+            }
+           
+           #email{
+                padding-left: 100px;
+           }
+
+          
+
+        </style>
+         
+
+        <title>Facelogin</title>
+    </head>
+
+    <script type="text/javascript">
+
+             var objRequest = new XMLHttpRequest();
+             var responseString;
+
+        function httpRequest(url) {
+                alert("FUNCTION REQUEST");
+
+                alert(url);
+
+                objRequest.open("GET", url, false);
+                objRequest.send();
+
+                responseString = objRequest.responseText;
+
+                alert("RESPONSE STRING: " + responseString);
+
+                return responseString;
+            }
+
+
+$(document).ready(function(){
+
+              
+
+             $('#Logar').click(function(){
+
+
+                   if($('.email').val() == ""){
+
+                        alert('Email e Senha são obrigatórios!');
+                       
+                    }else{
+
+                       var email = $('.email').val();
+                       var senha = $('.password').val();
+               
+                          $.post('http://www.thesamaface22.esy.es/Facethiago/index2.php',{email:email,senha:senha},function(variavel_resposta1){
+                          $('.result').html(variavel_resposta1);
+                          $('.email').val('');
+                          $('.password').val('');     
+                                setTimeout(function(){
+                                  location.href="pagina.html";
+                                },2000);               
+
+                            });
+
+                        alert('Logado com Sucesso!! Bem vindo Senhor(a):  ' +email);  
+                       
+
+
+                        localStorage.setItem("email", email);
+
+
+                      $("#Logar").attr("href", "pagina.html");
+
+                    } 
+
+
+
+             
+
+            });
+
+      
+
+
+
+  });
+
+
+    </script>
+
+    <body style="background-color:#425596 "  >      
+           
+
+        <div class="divImg" style="background-position:center">  </div>
+
+        <div class="formulario">
+
+             <form class="form-inline">
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputEmail3" placeholder="Email ou telefone">Email ou telefone</label>
+                        <input type="email" class="form-control email" id="exampleInputEmail3" placeholder="Email" >
+                      </div>
+                      <div class="form-group">
+                        <label class="sr-only" for="exampleInputPassword3" >Password</label>
+                        <input type="password" class="form-control password" id="password" placeholder="Password">
+                      </div>
+                    
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button  class="btn btn-sucess" id="Logar" ><a href="#">Entrar</a>  </button><br/>
+                    
+            </form>
+        </div>
+
+        <div class="result"></div>
+
+
+    </body>
+</html>
+  
